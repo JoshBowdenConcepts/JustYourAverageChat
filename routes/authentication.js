@@ -17,15 +17,11 @@ module.exports = function(app){
         res.redirect('/');
     });
 
-    // process the signup form
     app.post('/api/signup', passport.authenticate('local-signup'), (req, res) => {
-        // console.log(req.user);
         res.send(req.user);
     });
 
-    // process the login form
     app.post('/api/login', passport.authenticate('local-login'), (req, res) => {
-        // console.log(req.user);
         res.send(req.user);
     });
 

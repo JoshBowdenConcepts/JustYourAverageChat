@@ -8,6 +8,10 @@ const userSchema = new Schema({
         required: true,
         auto: true,
     },
+    username: {
+        type: String,
+        required: true
+    },
     local: {
         email: {
             type: String,

@@ -40,6 +40,7 @@ function(req, email, password, done) {
             // set the user's local credentials
             newUser.local.email    = email;
             newUser.local.password = newUser.generateHash(password);
+            newUser.username       = req.body.username;
 
             // save the user
             newUser.save(function(err) {

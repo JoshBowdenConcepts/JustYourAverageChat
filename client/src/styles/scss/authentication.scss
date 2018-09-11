@@ -1,0 +1,16 @@
+@import 'mixins';
+
+#authentication {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: $clouds;
+    position: relative;
+}
+
+#login, #signup {
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    background-color: $concrete;
+    border-radius: $border-radius;
+}
