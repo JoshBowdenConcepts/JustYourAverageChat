@@ -70,7 +70,7 @@ io.on('connection', function(socket) {
     // Fire callback and take in the data sent from the client
     socket.on('chat', function(data) {
         // Emit the event down all socket(s)
-        console.log('hitting');
+        console.log('A message is coming into socket:', data.message);
         io.sockets.emit('chat', data);
     })
 
@@ -78,7 +78,15 @@ io.on('connection', function(socket) {
     socket.on('typing', function(data){
         socket.broadcast.emit('typing', data);
     });
+
+    // Alert user disconnect
+    socket.on('disconnect', function() {
+        console.log('User is disconnecting', socket.id);
+    });
 });
+
+
+
 
 // Export the App
 module.exports = app;
