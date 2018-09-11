@@ -10,6 +10,7 @@
     #chat-window {
         height: 350px;
         padding-top: 10px;
+        overflow-y: scroll
     }
 
     #output {
@@ -28,7 +29,7 @@
         margin: 0 auto;
         text-align: left;
         padding: 10px 20px;
-        overflow-x: scroll;
+        overflow-x: hidden;
     }
 
     hr {

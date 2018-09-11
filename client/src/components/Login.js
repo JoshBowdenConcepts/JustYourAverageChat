@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -35,10 +36,21 @@ class Login extends Component {
         event.preventDefault();
         this.props.loginUser(this.state.email, this.state.password);
     }
+
+    setRedirect() {
+        if(this.props.auth !== false && this.props.auth !== null) {
+            return (
+                <div>
+                    <Redirect to="/chat" />
+                </div>
+            )
+        }
+    }
   
     render() {
       return (
         <div id="login" className="absolute-center">
+            {this.setRedirect()}
             <form onSubmit={this.handleSubmit}>
                 <div className="input-group">
                     <input

@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import openSocket from 'socket.io-client';
-import keys from '../config/keys';
 
 let socket = '';
 if(window.location.hostname === 'justyouraveragechat.herokuapp.com') {
