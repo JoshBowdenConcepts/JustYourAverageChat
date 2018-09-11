@@ -1,0 +1,15 @@
+{
+  "name": "JustYourAverageChat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PixelPerfectDev/JustYourAverageChat.git",
+  "author": "Josh Bowden",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.14",
+    "path": "^0.12.7",
+    "supervisor": "^0.12.0"
+  }
+}
