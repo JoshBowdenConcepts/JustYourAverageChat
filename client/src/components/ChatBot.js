@@ -7,8 +7,11 @@ class ChatBot extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            auth: this.props.auth 
+            auth: this.props.auth,
+            message: '',
+            username: 'Unknown',
         };
+        this.handleMessageChange = this.handleMessageChange.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -18,6 +21,16 @@ class ChatBot extends Component {
         };
       }
       return null;
+    }
+
+    componentDidMount() {
+        if(this.props.auth) {
+            this.setState({username: this.props.auth.username});
+        }
+    }
+
+    handleMessageChange(event) {
+        this.setState({message: event.target.value});
     }
 
     setRedirect() {
@@ -30,10 +43,38 @@ class ChatBot extends Component {
         }
     }
 
+    handleSubmit(event) {
+        event.preventDefault();
+    }
+
     render() {
         return (
             <div id="chat" className="absolute-center">
                 {this.setRedirect()}
+                <div id="output"></div>
+                <div id="feedback"></div>
+                <form onSubmit={this.handleSubmit}>
+                    <div className="input-group">
+                        <input
+                            type="text" 
+                            aria-label="Message" 
+                            id="message"
+                            value={this.state.message}
+                            onChange={this.handleMessageChange}
+                            className="form-control" 
+                            placeholder="Message"
+                        ></input>
+                    </div>
+                    <div className="input-group">
+                        <input
+                            type="hidden"
+                            id="handle"
+                            value={this.state.username}
+                            className="form-control"
+                        ></input>
+                    </div>
+                    <button type="submit" className="btn btn-primary w-100" id="send">Send</button>
+                </form>
             </div>
         );
     }

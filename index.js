@@ -2,7 +2,8 @@ const express = require('express'),
       passport = require('passport'),
       path = require('path'),
       cookieSession = require('cookie-session'),
-      mongoose = require('mongoose');
+      mongoose = require('mongoose'),
+      socket = require('socket.io');
 
 const app = express();
 app.use(express.json());
@@ -56,7 +57,28 @@ app.use((err, req, res, next) => {
 
 // Set up the port
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log('Express app listening on port ' + port + ''));
+const server = app.listen(port, () => console.log('Express app listening on port ' + port + ''));
+
+// Socket Setup
+const io = socket(server);
+
+io.on('connection', function(socket) {
+    console.log('Made socket connection', socket.id);
+
+    // Listen for message being sent from client
+    // Look for message name
+    // Fire callback and take in the data sent from the client
+    socket.on('chat', function(data) {
+        // Emit the event down all socket(s)
+        console.log('hitting');
+        io.sockets.emit('chat', data);
+    })
+
+    // Handle typing event
+    socket.on('typing', function(data){
+        socket.broadcast.emit('typing', data);
+    });
+});
 
 // Export the App
 module.exports = app;
