@@ -5,6 +5,8 @@ const express = require('express'),
       mongoose = require('mongoose');
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Add the config keys
 const keys = require('./config/keys');
@@ -12,8 +14,23 @@ const keys = require('./config/keys');
 // Connect to mongoose
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
+// Set up cookies
+app.use(
+    cookieSession({
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      keys: [keys.cookieKey]
+    })
+);
+
+// Set up passport
+app.use(passport.initialize());
+app.use(passport.session());
+require('./services/passport');
+
+
 // Import Routes
 require('./routes/index')(app);
+require('./routes/authentication')(app);
 
 // Set up static files
 app.use(express.static(path.join(__dirname, "client", "build")));
