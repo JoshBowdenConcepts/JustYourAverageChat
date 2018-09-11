@@ -3,7 +3,15 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:5000');
+import keys from '../config/keys';
+
+let socket = '';
+if(window.location.hostname === 'justyouraveragechat.herokuapp.com') {
+    socket = openSocket('https://justyouraveragechat.herokuapp.com/');
+} else {
+    socket = openSocket('http://localhost:5000');
+}
+
 
 class ChatBot extends Component {
     constructor(props) {
@@ -14,7 +22,6 @@ class ChatBot extends Component {
             username: 'Unknown',
         };
         this.handleMessageChange = this.handleMessageChange.bind(this);
-        // this.sendSocketIO = this.sendSocketIO.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
