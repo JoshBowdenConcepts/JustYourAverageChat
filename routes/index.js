@@ -1,8 +1,7 @@
 module.exports = function(app){
 
-    app.get('/', (req, res) => {
-        res.status(200);
-        res.sendFile('../client/public/index.html');
+    app.get('/api', (req, res) => {
+        res.send('hi');
     });
 
 }
