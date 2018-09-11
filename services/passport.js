@@ -97,7 +97,7 @@ passport.use('google',
 
         const user = await new User({
             'google.id': profile.id,
-          name: profile.name.givenName + " " + profile.name.familyName
+            username: profile.name.givenName + " " + profile.name.familyName
         }).save();
 
         done(null, user);
