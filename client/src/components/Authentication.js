@@ -5,19 +5,20 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Login from './Login';
 import Signup from './Signup';
+import ChatBot from './ChatBot';
 
 class Authentication extends Component {
     constructor(props) {
       super(props);
       this.state = { 
-          auth: this.props.auth 
+          auth: this.props.auth
         };
     }
 
     componentDidMount() {
       if (!this.props.auth) {
         this.props.fetchUser();
-      } 
+      }
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -37,6 +38,7 @@ class Authentication extends Component {
                 <Route exact path="/" component={() => <Login auth={this.props.auth} />} />
                 <Route exact path="/login" component={() => <Login auth={this.props.auth} />} />
                 <Route exact path="/signup" component={() => <Signup auth={this.props.auth} />} />
+                <Route path="/chat" component={() => <ChatBot auth={this.props.auth} />} />
             </div>
           </BrowserRouter>
         </div>

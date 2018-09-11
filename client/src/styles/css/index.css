@@ -31,4 +31,18 @@
   background-color: #95a5a6;
   border-radius: 4px; }
 
+.absolute-center {
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center; }
+
+#chat {
+  padding: 30px;
+  background-color: black; }
+
 /*# sourceMappingURL=index.css.map */
