@@ -2,9 +2,7 @@ module.exports = function(app){
 
     app.get('/', (req, res) => {
         res.status(200);
-        res.send({
-            hi: 'Hello fine user'
-        });
+        res.sendFile(__dirname + '/index.html');
     });
 
 }
