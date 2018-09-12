@@ -10,7 +10,7 @@ module.exports = function(app){
     app.get('/api/gifs/:query', (req, res) => {
         let query = req.params.query;
         let api_key = keys.giphyKey;
-        let requestURL = `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${api_key}&limit=9`;
+        let requestURL = `https://api.giphy.com/v1/gifs/search?q=${query}&api_key=${api_key}&limit=9&rating=g`;
         // The request works on its own in the browser
         console.log(requestURL);
 
