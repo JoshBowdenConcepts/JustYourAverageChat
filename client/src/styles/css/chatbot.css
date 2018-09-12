@@ -13,7 +13,8 @@
   max-width: 90%;
   border-radius: 4px;
   background-color: white;
-  box-shadow: 0px 0px 5px 0px #cfd9db; }
+  box-shadow: 0px 0px 5px 0px #cfd9db;
+  margin: 0px auto; }
   #chat #chat-window {
     height: 350px;
     padding-top: 10px;
@@ -31,5 +32,19 @@
   #chat hr {
     margin: 0 auto;
     width: 95%; }
+
+#gif-search, #image-search {
+  height: 0px;
+  transition: 0.3s;
+  display: none;
+  background-color: #ddd; }
+
+.searchExpand {
+  height: 150px !important;
+  display: block !important; }
+
+#thumbnails {
+  height: auto;
+  overflow-y: scroll; }
 
 /*# sourceMappingURL=chatbot.css.map */

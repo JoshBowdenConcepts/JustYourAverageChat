@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import openSocket from 'socket.io-client';
 
+import Search from './Search';
+
 let socket = '';
 if(window.location.hostname === 'justyouraveragechat.herokuapp.com') {
     socket = openSocket('https://justyouraveragechat.herokuapp.com/');
@@ -19,6 +21,7 @@ class ChatBot extends Component {
             auth: this.props.auth,
             message: '',
             username: 'Unknown',
+            gifSearch: true,
         };
         this.handleMessageChange = this.handleMessageChange.bind(this);
     }
@@ -82,9 +85,42 @@ class ChatBot extends Component {
         message.value = '';
     }
 
+    expandSearch(id) {
+        if (document.getElementById(id).classList.contains('searchExpand')) {
+            document.getElementById(id).classList.remove('searchExpand');
+            document.getElementById('addGif').classList.remove('bg-secondary');
+            document.getElementById('addGif').classList.remove('text-white');
+            document.getElementById('addImage').classList.remove('bg-secondary');
+            document.getElementById('addImage').classList.remove('text-white');
+        } else {
+            document.getElementById(id).classList.add('searchExpand');
+            if (id === 'gif-search') {
+                document.getElementById('image-search').classList.remove('searchExpand');
+                document.getElementById('addGif').classList.add('bg-secondary');
+                document.getElementById('addGif').classList.add('text-white');
+                document.getElementById('addImage').classList.remove('bg-secondary');
+                document.getElementById('addImage').classList.remove('text-white');
+            } else {
+                document.getElementById('gif-search').classList.remove('searchExpand');
+                document.getElementById('addImage').classList.add('bg-secondary');
+                document.getElementById('addImage').classList.add('text-white');
+                document.getElementById('addGif').classList.remove('bg-secondary');
+                document.getElementById('addGif').classList.remove('text-white');
+            }
+        }
+    }
+
+    gifSearch() {
+        // Put the gif search code here
+    }
+
+    imageSearch() {
+        // Put the image search code here
+    }
+
     render() {
         return (
-            <div id="chat" className="absolute-center">
+            <div id="chat">
                 {this.setRedirect()}
                 <div id="chat-window">
                     <div id="output"></div>
@@ -92,13 +128,33 @@ class ChatBot extends Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="input-group">
+                        <button 
+                            id="addGif"
+                            type="button"
+                            className="btn btn-outline-secondary w-50 rounded-top"
+                            onClick={() => this.expandSearch('gif-search')}
+                        >Add Gifs</button>
+                        <button 
+                            id="addImage"
+                            className="btn btn-outline-secondary w-50 rounded-top"
+                            type="button"
+                            onClick={() => this.expandSearch('image-search')}
+                        >Add Image</button>
+                    </div>
+                    <div id="gif-search" >
+                        <Search searchFor={(term) => this.gifSearch(term)} />
+                    </div>
+                    <div id="image-search" >
+                        <Search searchFor={(term) => this.imageSearch(term)} />
+                    </div>
+                    <div className="input-group">
                         <input
                             type="text" 
                             aria-label="Message" 
                             id="message"
                             value={this.state.message}
                             onChange={this.handleMessageChange}
-                            className="form-control" 
+                            className="form-control rounded-0" 
                             placeholder="Message"
                         ></input>
                     </div>
@@ -110,7 +166,7 @@ class ChatBot extends Component {
                             className="form-control"
                         ></input>
                     </div>
-                    <button type="submit" className="btn btn-primary w-100" id="send">Send</button>
+                    <button type="submit" className="btn btn-primary w-100 rounded-0 rounded-bottom" id="send">Send</button>
                 </form>
             </div>
         );
@@ -119,4 +175,8 @@ class ChatBot extends Component {
     
 }
 
-export default connect(null, actions)(ChatBot);
+function mapStateToProps({ auth }) {
+    return { auth };
+}
+
+export default connect(mapStateToProps, actions)(ChatBot);

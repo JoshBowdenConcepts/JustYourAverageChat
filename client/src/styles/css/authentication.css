@@ -12,7 +12,8 @@
   width: 100vw;
   min-height: 100vh;
   background-color: #ecf0f1;
-  position: relative; }
+  position: relative;
+  padding: 100px 0px; }
 
 #login, #signup {
   padding: 30px;
