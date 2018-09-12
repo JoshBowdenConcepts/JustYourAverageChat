@@ -92,11 +92,14 @@ class ChatBot extends Component {
         event.preventDefault();
         let message = document.getElementById('message'),
             handle = document.getElementById('handle');
-        socket.emit('chat', {
-            message: message.value,
-            handle: handle.value
-        });
-    
+
+        if (message.value !== '') {
+            socket.emit('chat', {
+                message: message.value,
+                handle: handle.value
+            });
+        }
+        
         message.value = '';
     }
 
@@ -127,7 +130,9 @@ class ChatBot extends Component {
 
     gifSearch(term) {
         // Put the gif search code here
-        this.props.gifSearch(term);
+        if (term !== '') {
+            this.props.gifSearch(term);
+        }
     }
 
     renderGifs() {
