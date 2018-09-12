@@ -49,18 +49,32 @@ class ChatBot extends Component {
         const output = document.getElementById('output'),
               feedback = document.getElementById('feedback');
 
+
         socket.on('chat', function(data) {
             feedback.innerHTML = '';
             output.innerHTML += '<p class="message-output"><strong>' + data.handle + ':</strong> ' + data.message + '</p><hr>';
+            let lastOutput = document.getElementById('output').lastChild;
+            if(lastOutput) {
+                lastOutput.scrollIntoView();
+            }
+            
         });
 
         socket.on('chatGif', function(data) {
             feedback.innerHTML = '';
             output.innerHTML += '<p class="message-output"><strong>' + data.handle + ': </strong></p><div class="gif-message"><div class="gif-thumbnail" style="background-image: url(' + data.gif + '); position: relative; right: 0;"></div></div><hr>';
+            let lastOutput = document.getElementById('output').lastChild;
+            if(lastOutput) {
+                lastOutput.scrollIntoView();
+            }
         });
         
         socket.on('typing', function(data){
             feedback.innerHTML = '<p class="alert-message"><em>' + data + ' is typing a message...</em></p>';
+            let lastOutput = document.getElementById('output').lastChild;
+            if(lastOutput) {
+                lastOutput.scrollIntoView();
+            }
         });
 
         if (!this.state.gifs) {
