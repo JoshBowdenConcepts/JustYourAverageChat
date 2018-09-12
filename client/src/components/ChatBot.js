@@ -62,7 +62,7 @@ class ChatBot extends Component {
 
         socket.on('chatGif', function(data) {
             feedback.innerHTML = '';
-            output.innerHTML += '<p class="message-output"><strong>' + data.handle + ': </strong></p><div class="gif-message"><div class="gif-thumbnail" style="background-image: url(' + data.gif + '); position: relative; right: 0;"></div></div><hr>';
+            output.innerHTML += '<p class="message-output"><strong>' + data.handle + ': </strong></p><div class="gif-message"><a href=' + data.gif + ' target="_blank"><div class="gif-thumbnail" style="background-image: url(' + data.gif + '); position: relative; right: 0;"></div></a></div><hr>';
             let lastOutput = document.getElementById('output').lastChild;
             if(lastOutput) {
                 lastOutput.scrollIntoView();
