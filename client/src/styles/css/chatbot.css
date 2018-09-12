@@ -34,17 +34,32 @@
     width: 95%; }
 
 #gif-search, #image-search {
-  height: 0px;
   transition: 0.3s;
   display: none;
   background-color: #ddd; }
 
 .searchExpand {
-  height: 150px !important;
   display: block !important; }
 
 #thumbnails {
   height: auto;
   overflow-y: scroll; }
+
+.gif-thumbnail {
+  height: 120px;
+  width: 120px;
+  margin: 5px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer; }
+
+#gifs-container {
+  overflow-y: scroll;
+  height: 230px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px 0px 10px 0px; }
 
 /*# sourceMappingURL=chatbot.css.map */

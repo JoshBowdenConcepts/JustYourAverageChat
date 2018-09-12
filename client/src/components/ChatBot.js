@@ -19,6 +19,7 @@ class ChatBot extends Component {
         super(props);
         this.state = { 
             auth: this.props.auth,
+            gifs: this.props.gifs,
             message: '',
             username: 'Unknown',
             gifSearch: true,
@@ -30,6 +31,11 @@ class ChatBot extends Component {
       if (props.auth !== state.auth) {
         return {
           auth: props.auth
+        };
+      }
+      if (props.gifs !== state.gifs) {
+        return {
+            gifs: props.gifs
         };
       }
       return null;
@@ -110,8 +116,30 @@ class ChatBot extends Component {
         }
     }
 
-    gifSearch() {
+    gifSearch(term) {
         // Put the gif search code here
+        this.props.gifSearch(term);
+    }
+
+    renderGifs() {
+        if (this.state.gifs) {
+            let gifsArray =[];
+            this.state.gifs.data.forEach((gif) => {
+                gifsArray.push(
+                    <div
+                        key={gif.id}
+                        className="gif-thumbnail"
+                        style={{
+                            backgroundColor: '#ddd',
+                            backgroundImage: 'url(https://media.giphy.com/media/' + gif.id + '/giphy.gif)'
+                        }}
+                    >
+                    </div>
+                )
+            });
+
+            return gifsArray;
+        }
     }
 
     imageSearch() {
@@ -143,6 +171,9 @@ class ChatBot extends Component {
                     </div>
                     <div id="gif-search" >
                         <Search searchFor={(term) => this.gifSearch(term)} />
+                        <div id="gifs-container">
+                            {this.renderGifs()}
+                        </div>
                     </div>
                     <div id="image-search" >
                         <Search searchFor={(term) => this.imageSearch(term)} />
@@ -175,8 +206,8 @@ class ChatBot extends Component {
     
 }
 
-function mapStateToProps({ auth }) {
-    return { auth };
+function mapStateToProps({ auth, gifs }) {
+    return { auth, gifs };
 }
 
 export default connect(mapStateToProps, actions)(ChatBot);

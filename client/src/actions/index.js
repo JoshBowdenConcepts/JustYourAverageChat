@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER } from './types';
+import { FETCH_USER, FETCH_GIFS } from './types';
 
 // GET /api/current_use --- Get the current user
 export const fetchUser = () => async dispatch => {
@@ -42,4 +42,10 @@ export const signupUser = (email, password, passwordConf, username) => async dis
     console.log(error);
   });
   dispatch({ type: FETCH_USER, payload: newUser.data });
+};
+
+// Get /gifs/search
+export const gifSearch = (query) => async dispatch => {
+  const gifs = await axios.get(`/api/gifs/${query}`);
+  dispatch({ type: FETCH_GIFS, payload: gifs.data });
 };

@@ -7,6 +7,7 @@ export default class Search extends Component {
             term: ''
         };
         this.handleTermChange = this.handleTermChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleTermChange(event) {
@@ -21,14 +22,17 @@ export default class Search extends Component {
     render() {
         return (
             <div id="search">
-                <input
-                    type="text" 
-                    aria-label="Search" 
-                    value={this.state.term}
-                    onChange={this.handleTermChange}
-                    className="form-control mb-0 rounded-0" 
-                    placeholder="Try Happy..."
-                ></input>
+                <div className="input-group">
+                    <input
+                        type="text" 
+                        aria-label="Search" 
+                        value={this.state.term}
+                        onChange={this.handleTermChange}
+                        className="form-control mb-0 rounded-0" 
+                        placeholder="Try Happy..."
+                    ></input>
+                    <button type="button" className="btn btn-success rounded-0" onClick={this.handleSubmit}>Submit</button>
+                </div>
             </div>
         );
     }
