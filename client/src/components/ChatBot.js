@@ -53,10 +53,19 @@ class ChatBot extends Component {
             feedback.innerHTML = '';
             output.innerHTML += '<p class="message-output"><strong>' + data.handle + ':</strong> ' + data.message + '</p><hr>';
         });
+
+        socket.on('chatGif', function(data) {
+            feedback.innerHTML = '';
+            output.innerHTML += '<p class="message-output"><strong>' + data.handle + ': </strong></p><div class="gif-message"><div class="gif-thumbnail" style="background-image: url(' + data.gif + '); position: relative; right: 0;"></div></div><hr>';
+        });
         
         socket.on('typing', function(data){
             feedback.innerHTML = '<p class="alert-message"><em>' + data + ' is typing a message...</em></p>';
         });
+
+        if (!this.state.gifs) {
+            this.props.gifSearch('happy');
+        }
     }
 
     componentWillUnmount() {
@@ -128,6 +137,7 @@ class ChatBot extends Component {
                 gifsArray.push(
                     <div
                         key={gif.id}
+                        onClick={() => this.postGif(gif.id)}
                         className="gif-thumbnail"
                         style={{
                             backgroundColor: '#ddd',
@@ -140,6 +150,15 @@ class ChatBot extends Component {
 
             return gifsArray;
         }
+    }
+
+    postGif(id) {
+        let gif = `https://media.giphy.com/media/${id}/giphy.gif`,
+            handle = document.getElementById('handle');
+        socket.emit('chatGif', {
+            gif: gif,
+            handle: handle.value
+        });
     }
 
     imageSearch() {

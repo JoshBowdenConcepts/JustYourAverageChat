@@ -72,6 +72,12 @@ io.on('connection', function(socket) {
         // Emit the event down all socket(s)
         console.log('A message is coming into socket:', data.message);
         io.sockets.emit('chat', data);
+    });
+
+    socket.on('chatGif', function(data) {
+        // Emit the event down all socket(s)
+        console.log('A gif is coming into socket:', data.gif);
+        io.sockets.emit('chatGif', data);
     })
 
     // Handle typing event
