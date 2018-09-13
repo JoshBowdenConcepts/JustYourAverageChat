@@ -46,11 +46,21 @@ class Login extends Component {
             )
         }
     }
+
+    renderError() {
+        let urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            return (
+                <p>{urlParams.get('error')}</p>
+            );
+        }
+    }
   
     render() {
       return (
         <div id="login" className="absolute-center">
             {this.setRedirect()}
+            {this.renderError()}
             <form onSubmit={this.handleSubmit}>
                 <div className="input-group">
                     <input

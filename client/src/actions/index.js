@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_GIFS } from './types';
+import { FETCH_USER, FETCH_GIFS, FETCH_IMAGES } from './types';
 
 // GET /api/current_use --- Get the current user
 export const fetchUser = () => async dispatch => {
@@ -21,9 +21,7 @@ export const loginUser = (email, password) => async dispatch => {
     dispatch({ type: FETCH_USER, payload: user.data });
   } else {
     dispatch({ type: FETCH_USER, payload: user });
-    let hostname = window.location.hostname;
-    hostname += '?error=Either your email or password are incorrect.';
-    window.location = hostname;
+    window.location = '/login?error=Either your email or password are incorrect.';
   }
   
 };
@@ -48,4 +46,10 @@ export const signupUser = (email, password, passwordConf, username) => async dis
 export const gifSearch = (query) => async dispatch => {
   const gifs = await axios.get(`/api/gifs/${query}`);
   dispatch({ type: FETCH_GIFS, payload: gifs.data });
+};
+
+// Get /pexels/search
+export const imageSearch = (query) => async dispatch => {
+  const images = await axios.get(`/api/pexels/${query}`);
+  dispatch({ type: FETCH_IMAGES, payload: images.data });
 };
