@@ -65,6 +65,8 @@ const io = socket(server);
 io.on('connection', function(socket) {
     console.log('Made socket connection', socket.id);
 
+    io.sockets.emit('user');
+
     // Listen for message being sent from client
     // Look for message name
     // Fire callback and take in the data sent from the client
@@ -83,6 +85,12 @@ io.on('connection', function(socket) {
     // Handle typing event
     socket.on('typing', function(data){
         socket.broadcast.emit('typing', data);
+    });
+
+    // Handle stopped typing event
+    socket.on('stoppedTyping', function(data){
+        console.log('User stopped typing');
+        socket.broadcast.emit('stoppedTyping', data);
     });
 
     // Alert user disconnect

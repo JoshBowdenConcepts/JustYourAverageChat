@@ -31,7 +31,7 @@ export default class Search extends Component {
                         className="form-control mb-0 rounded-0" 
                         placeholder="Try Happy..."
                     ></input>
-                    <button type="button" className="btn btn-success rounded-0" onClick={this.handleSubmit}>Submit</button>
+                    <button type="button" className="btn btn-success rounded-0" onClick={this.handleSubmit}>Search</button>
                 </div>
             </div>
         );

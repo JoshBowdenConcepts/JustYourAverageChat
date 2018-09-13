@@ -25,12 +25,18 @@ class ChatBot extends Component {
             gifSearch: true,
         };
         this.handleMessageChange = this.handleMessageChange.bind(this);
+        this.setState = this.setState.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
       if (props.auth !== state.auth) {
         return {
           auth: props.auth
+        };
+      }
+      if (props.auth !== state.auth) {
+        return {
+          username: props.auth.username
         };
       }
       if (props.gifs !== state.gifs) {
@@ -45,10 +51,12 @@ class ChatBot extends Component {
         if(this.props.auth) {
             this.setState({username: this.props.auth.username});
         }
+
         // Add event listener 
         const output = document.getElementById('output'),
               feedback = document.getElementById('feedback');
-
+              
+              
 
         socket.on('chat', function(data) {
             feedback.innerHTML = '';
@@ -77,6 +85,10 @@ class ChatBot extends Component {
             }
         });
 
+        socket.on('stoppedTyping', function(data){
+            feedback.innerHTML = '';
+        });
+
         if (!this.state.gifs) {
             this.props.gifSearch('happy');
         }
@@ -89,7 +101,13 @@ class ChatBot extends Component {
     handleMessageChange(event) {
         this.setState({message: event.target.value});
         let handle = document.getElementById('handle');
-        socket.emit('typing', handle.value);
+        if (event.target.value !== '') { 
+            socket.emit('typing', handle.value);
+        } else {
+            // User deleted all of the text in the field
+            socket.emit('stoppedTyping', 'done');
+        }
+        
     }
 
     setRedirect() {
@@ -237,6 +255,7 @@ class ChatBot extends Component {
                     </div>
                     <button type="submit" className="btn btn-primary w-100 rounded-0 rounded-bottom" id="send">Send</button>
                 </form>
+                <div id="active-users"></div>
             </div>
         );
     }
