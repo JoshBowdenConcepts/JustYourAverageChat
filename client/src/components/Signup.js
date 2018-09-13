@@ -107,9 +107,9 @@ class Signup extends Component {
                 ></input>
             </div>
             <button type="submit" className="btn btn-primary w-100">Submit</button>
-            <Link to="/auth/google">
+            <a href="/auth/google">
                 <button type="button" className="btn btn-secondary w-100 mt-2">Sign up with Google</button>
-            </Link>
+            </a>
           </form>
           <Link to="/login" className="mt-3">Login</Link>
         </div>

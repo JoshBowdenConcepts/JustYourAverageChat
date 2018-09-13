@@ -83,9 +83,9 @@ class Login extends Component {
                     ></input>
                 </div>
                 <button type="submit" className="btn btn-primary mt-3 w-100">Submit</button>
-                <Link to="/auth/google">
+                <a href="/auth/google">
                     <button type="button" className="btn btn-secondary w-100 mt-2">Log in with Google</button>
-                </Link>
+                </a>
             </form>
             <Link to="/signup" className="mt-3">Signup</Link>
         </div>

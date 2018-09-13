@@ -38,7 +38,8 @@ class Authentication extends Component {
                 <Route exact path="/" component={() => <Login auth={this.props.auth} />} />
                 <Route exact path="/login" component={() => <Login auth={this.props.auth} />} />
                 <Route exact path="/signup" component={() => <Signup auth={this.props.auth} />} />
-                <Route path="/chat" component={() => <ChatBot auth={this.props.auth} />} />
+                <Route exact path="/chat" component={() => <ChatBot auth={this.props.auth} />} />
+                <Route exact path="/api/logout" component={() => <Login auth={this.props.auth} />} />
             </div>
           </BrowserRouter>
         </div>
