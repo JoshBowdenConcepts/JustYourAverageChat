@@ -79,4 +79,8 @@
   border-bottom-right-radius: 0px !important;
   border: 1px solid #ddd; }
 
+#send {
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important; }
+
 /*# sourceMappingURL=chatbot.css.map */
