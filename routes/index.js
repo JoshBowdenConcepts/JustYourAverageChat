@@ -24,7 +24,6 @@ module.exports = function(app){
                 // res.send('success');
                 res.send(body);
             } else {
-                res.send('fail');
                 res.send(error);
             }
         });
@@ -34,13 +33,16 @@ module.exports = function(app){
     app.get('/api/pexels/:query', (req, res) => {
         let query = req.params.query;
         let api_key = keys.pexelsKey;
-        let requestURL = `https://api.pexels.com/v1/search?q=${query}&api_key=${api_key}&per_page=9&page=1`;
+        let requestURL = `https://api.pexels.com/v1/search?query=${query}&per_page=9&page=1`;
         // The request works on its own in the browser
         console.log(requestURL);
 
         request({
             method: 'GET',
-            uri: requestURL
+            uri: requestURL,
+            headers: {
+                Authorization: api_key
+            }
         },
         function(error, response, body) {
             if (!error && response.statusCode === 200) {
@@ -48,7 +50,6 @@ module.exports = function(app){
                 // res.send('success');
                 res.send(body);
             } else {
-                res.send('fail');
                 res.send(error);
             }
         });
