@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { FETCH_USER, FETCH_GIFS, FETCH_IMAGES } from './types';
 
+/* It would be cool to make a function that creates a promise
+ * when one action is occurring and a second request is made
+ * When the first resolves the second one would be called so
+ * proxy error wouldn't occur.
+*/
+
 // GET /api/current_use --- Get the current user
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
