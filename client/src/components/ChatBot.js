@@ -95,7 +95,7 @@ class ChatBot extends Component {
             feedback.innerHTML = '';
         });
 
-        if (!this.state.gifs) {
+        if (!this.state.gifs && !this.state.images) {
             this.props.gifSearch('happy');
             this.props.imageSearch('happy');
         }

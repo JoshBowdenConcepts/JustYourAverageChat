@@ -59,7 +59,7 @@
     overflow-y: scroll;
 }
 
-.gif-thumbnail {
+.gif-thumbnail, .image-thumbnail {
     height: 120px;
     width: 120px;
     margin: 5px;
@@ -69,7 +69,7 @@
     cursor: pointer;
 }
 
-#gifs-container {
+#gifs-container, #image-container {
     overflow-y: scroll;
     height: 230px;
     display: flex;
