@@ -20,6 +20,7 @@ class ChatBot extends Component {
         this.state = { 
             auth: this.props.auth,
             gifs: this.props.gifs,
+            images: this.props.images,
             message: '',
             username: 'Unknown',
             gifSearch: true,
@@ -42,6 +43,11 @@ class ChatBot extends Component {
       if (props.gifs !== state.gifs) {
         return {
             gifs: props.gifs
+        };
+      }
+      if (props.images !== state.images) {
+        return {
+            images: props.images
         };
       }
       return null;
@@ -91,6 +97,7 @@ class ChatBot extends Component {
 
         if (!this.state.gifs) {
             this.props.gifSearch('happy');
+            this.props.imageSearch('happy');
         }
     }
 
@@ -198,8 +205,42 @@ class ChatBot extends Component {
         });
     }
 
-    imageSearch() {
-        // Put the image search code here
+    imageSearch(term) {
+        // Put the gif search code here
+        if (term !== '') {
+            this.props.imageSearch(term);
+        }
+    }
+
+    renderImages() {
+        if (this.state.images) {
+            let imageArray =[];
+            this.state.images.photos.forEach((image) => {
+                imageArray.push(
+                    <div
+                        key={image.id}
+                        onClick={() => this.postImage(image.src.medium)}
+                        className="image-thumbnail"
+                        style={{
+                            backgroundColor: '#ddd',
+                            backgroundImage: 'url(' + image.src.medium + ')'
+                        }}
+                    >
+                    </div>
+                )
+            });
+
+            return imageArray;
+        }
+    }
+
+    postImage(url) {
+        let image = url,
+            handle = document.getElementById('handle');
+        socket.emit('chatGif', {
+            gif: image,
+            handle: handle.value
+        });
     }
 
     render() {
@@ -233,6 +274,9 @@ class ChatBot extends Component {
                     </div>
                     <div id="image-search" >
                         <Search searchFor={(term) => this.imageSearch(term)} />
+                        <div id="image-container">
+                            {this.renderImages()}
+                        </div>
                     </div>
                     <div className="input-group">
                         <input
@@ -263,8 +307,8 @@ class ChatBot extends Component {
     
 }
 
-function mapStateToProps({ auth, gifs }) {
-    return { auth, gifs };
+function mapStateToProps({ auth, gifs, images }) {
+    return { auth, gifs, images };
 }
 
 export default connect(mapStateToProps, actions)(ChatBot);
