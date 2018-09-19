@@ -41,14 +41,16 @@ Along with being a MERN stack application, this application utilizes the followi
         * In the config folder in the main repo create a dev.js file.
         * The file should look like the following:
         
-        ```module.exports = {
+        ```
+        module.exports = {
             googleClientID: '{YOUR GOOGLE CLIENT ID}',
             googleClientSecret: '{YOUR GOOGLE CLIENT SECRET}',
             mongoURI: '{YOUR MLAB URI}',
             cookieKey: '{CREATE A STRING THAT WONT EASILY BE REPLECATED}',
             giphyKey: '{YOUR GIPHY KEY}',
             pexelsKey: '{YOUR PEXELS KEY}'
-        };```
+        };
+        ```
         
 4. Now that the setup is complete run ```yarn run dev``` to start the application on your local computer. 
 
