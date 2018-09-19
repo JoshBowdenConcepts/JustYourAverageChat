@@ -40,6 +40,7 @@ Along with being a MERN stack application, this application utilizes the followi
     5. Structuring the config file.
         * In the config folder in the main repo create a dev.js file.
         * The file should look like the following:
+        
         ```module.exports = {
             googleClientID: '{YOUR GOOGLE CLIENT ID}',
             googleClientSecret: '{YOUR GOOGLE CLIENT SECRET}',
@@ -48,6 +49,7 @@ Along with being a MERN stack application, this application utilizes the followi
             giphyKey: '{YOUR GIPHY KEY}',
             pexelsKey: '{YOUR PEXELS KEY}'
         };```
+        
 4. Now that the setup is complete run ```yarn run dev``` to start the application on your local computer. 
 
 
